@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final colors = [
+final colors = <Color>[
   Colors.blue,
   Colors.blueAccent,
   Colors.red, 
@@ -16,8 +16,12 @@ final colors = [
 ];
 
 class AppTheme {
-  ThemeData getTheme(int index) => ThemeData(
+  int selectedColor = 0;
+
+  AppTheme({required this.selectedColor});
+
+  ThemeData getTheme() => ThemeData(
     useMaterial3: true,
-    colorSchemeSeed: colors[index]
+    colorSchemeSeed: colors[selectedColor]
   );
 }
