@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:notes_app/presentation/widgets/custom_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -29,7 +30,9 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {}, child: const Icon(Icons.add_rounded)),
+          onPressed: () {
+            context.go('/note/2');
+          }, child: const Icon(Icons.add_rounded)),
     );
   }
 }
