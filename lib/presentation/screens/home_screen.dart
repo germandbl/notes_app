@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: const SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
               CustomCard(),
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            context.go('/note/2');
+            context.push('/note/2');
           }, child: const Icon(Icons.add_rounded)),
     );
   }
