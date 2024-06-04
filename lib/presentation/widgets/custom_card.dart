@@ -54,8 +54,11 @@ class CustomCard extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 10),
-                  const Text(
-                      'Aliquip ea irure pariatur ipsum nulla eu culpa exercitation anim ea proident nostrud quis. Culpa aute amet cupidatat ut elit aute consequat eu et nostrud. Laboris sint ea ut qui eu minim ad ad occaeca...'),
+                  const SizedBox(
+                    height: 120,
+                    child: Text(
+                        'Aliquip ea irure pariatur ipsum nulla eu culpa exercitation anim ea proident nostrud quis. Culpa aute amet cupidatat ut elit aute consequat eu et nostrud. Laboris sint ea ut qui eu minim ad ad occaeca...'),
+                  ),
                 ],
               )),
         ));
