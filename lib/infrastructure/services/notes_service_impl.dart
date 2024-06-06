@@ -13,5 +13,23 @@ class NotesServiceImpl extends NotesService {
     // TODO: implement getNotes
     throw UnimplementedError();
   }
+  
+  @override
+  Future<Note> createNote(Note note) {
+    // TODO: implement createNote
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future deleteNoteById(int id) {
+    // TODO: implement deleteNoteById
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<Note> updateNote(Note note) {
+    // TODO: implement updateNote
+    throw UnimplementedError();
+  }
 
 }
