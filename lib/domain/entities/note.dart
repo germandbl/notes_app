@@ -1,5 +1,5 @@
 class Note {
-  final int noteId;
+  final int? noteId;
   final String title;
   final String? description;
   final bool important;
