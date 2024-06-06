@@ -41,16 +41,16 @@ class CustomCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        'Importancia:',
+                        'Importante:',
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
-                      Text(' Alta'),
+                      Text(' Sí'),
                       SizedBox(width: 20),
                       Text(
                         'Estado:',
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
-                      Text(' Pendiente')
+                      Text(' Creado')
                     ],
                   ),
                   const SizedBox(height: 10),
