@@ -4,21 +4,25 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     required this.alignLabelWithHint,
+    required this.inputController,
+    required this.inputFocusNode,
     required this.labelText,
     required this.maxLength,
     required this.maxLines,
     required this.textInputType,
-    required this.inputController,
-    required this.inputFocusNode,
+    required this.validator,
+    this.onChanged,
   });
 
   final bool alignLabelWithHint;
+  final TextEditingController inputController;
+  final FocusNode inputFocusNode;
   final String labelText;
   final int maxLength;
   final int maxLines;
   final TextInputType textInputType;
-  final TextEditingController inputController;
-  final FocusNode inputFocusNode;
+  final String? Function(String?) validator;
+  final String? Function(String?)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +33,8 @@ class CustomTextFormField extends StatelessWidget {
       onTapOutside: (event) {
         inputFocusNode.unfocus();
       },
-      validator: (String? value) {
-        if (value == null || value.isEmpty) {
-          return "Por favor ingresa un titulo";
-        }
-        return null;
-      },
+      validator: validator,
+      onChanged: onChanged,
       focusNode: inputFocusNode,
       controller: inputController,
       decoration: InputDecoration(
