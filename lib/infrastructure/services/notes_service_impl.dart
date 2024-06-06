@@ -3,7 +3,7 @@ import 'package:notes_app/domain/services/notes_service.dart';
 
 class NotesServiceImpl extends NotesService {
   @override
-  Future<Note> getNoteById() {
+  Future<Note> getNoteById(int noteId) {
     // TODO: implement getNoteById
     throw UnimplementedError();
   }
