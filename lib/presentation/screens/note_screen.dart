@@ -36,8 +36,9 @@ class _NoteScreenState extends State<NoteScreen> {
               padding: const EdgeInsets.only(right: 4),
               child: IconButton(
                 onPressed: () {
-                  print(
-                      '${titleController.text}, ${descriptionController.text}, Es importante: ${important}, ${selectedState}');
+                  if (_formKey.currentState!.validate()) {
+                    //TODO: Implementar creacion de nota
+                  }
                 },
                 icon: Icon(Icons.save, color: colors.primary),
                 style: IconButton.styleFrom(
