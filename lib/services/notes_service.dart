@@ -1,19 +1,52 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:notes_app/models/note.dart';
 
 class NotesService {
-  Future<Note> getNoteById(int noteId) {
-    // TODO: implement getNoteById
-    throw UnimplementedError();
+  final notesInstance = FirebaseFirestore.instance.collection('note');
+
+  Future<Note> getNoteById(String noteId) async {
+    final snapshot = await notesInstance.get();
+
+    final note = snapshot.docs
+        .where((document) => document.id == noteId)
+        .map((document) => Note(
+            noteId: document.id,
+            title: document.data()['title'],
+            description: document.data()['description'],
+            important: document.data()['important'],
+            state: document.data()['state'],
+            createdAt: document.data()['createdAt']))
+        .single;
+
+    return note;
   }
 
-  Future<List<Note>> getNotes() {
-    // TODO: implement getNotes
-    throw UnimplementedError();
+  Future<List<Note>> getNotes() async {
+    List<Note> notes = [];
+
+    final snapshot = await notesInstance.get();
+
+    notes = snapshot.docs.map((doc) {
+      return Note(
+          noteId: doc.id,
+          title: doc.data()['title'],
+          description: doc.data()['description'],
+          important: doc.data()['important'],
+          state: doc.data()['state'],
+          createdAt: doc.data()['createdAt']);
+    }).toList();
+
+    return notes;
   }
 
-  Future<Note> createNote(Note note) {
-    // TODO: implement createNote
-    throw UnimplementedError();
+  Future<DocumentReference> create(Note note) {
+    return notesInstance.add(<String, dynamic>{
+      'title': note.title,
+      'description': note.description,
+      'state': note.state,
+      'important': note.important,
+      'createdAt': note.createdAt
+    });
   }
 
   Future deleteNoteById(int id) {
