@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:notes_app/models/note.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({
     super.key,
+    required this.note,
   });
+
+  final Note note;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +23,7 @@ class CustomCard extends StatelessWidget {
         ).clipBehavior,
         child: InkWell(
           onTap: () {
-            context.go('/note/adasdasd');
+            context.go('/note/${note.noteId}');
           },
           child: Padding(
               padding: const EdgeInsets.all(10),
@@ -30,9 +34,9 @@ class CustomCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Hacer tarea de calculo en la tarde',
-                        style: TextStyle(
+                      Text(
+                        note.title,
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500),
                       ),
                       IconButton(
@@ -40,27 +44,26 @@ class CustomCard extends StatelessWidget {
                           icon: const Icon(Icons.more_vert_rounded))
                     ],
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Importante:',
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
-                      Text(' Sí'),
-                      SizedBox(width: 20),
-                      Text(
+                      Text(' ${note.important ? "Sí" : "No"}'),
+                      const SizedBox(width: 20),
+                      const Text(
                         'Estado:',
                         style: TextStyle(fontWeight: FontWeight.w500),
                       ),
-                      Text(' Creado')
+                      Text(' ${note.state}')
                     ],
                   ),
                   const SizedBox(height: 10),
-                  const SizedBox(
+                  SizedBox(
                     height: 120,
-                    child: Text(
-                        'Aliquip ea irure pariatur ipsum nulla eu culpa exercitation anim ea proident nostrud quis. Culpa aute amet cupidatat ut elit aute consequat eu et nostrud. Laboris sint ea ut qui eu minim ad ad occaeca...'),
+                    child: Text(note.description ?? ''),
                   ),
                 ],
               )),

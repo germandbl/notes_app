@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:notes_app/models/note.dart';
+import 'package:notes_app/providers/notes_provider.dart';
 import 'package:notes_app/widgets/custom_text_form_field.dart';
+import 'package:provider/provider.dart';
 
 class CreateNoteScreen extends StatefulWidget {
-  const CreateNoteScreen({super.key, this.noteId});
-
-  final int? noteId;
+  const CreateNoteScreen({super.key});
 
   @override
   State<CreateNoteScreen> createState() => _CreateNoteScreenState();
@@ -22,6 +23,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final notesProvider = context.read<NotesProvider>();
     final colors = Theme.of(context).colorScheme;
     List<DropdownMenuItem<String>> states = const [
       DropdownMenuItem(value: 'Creado', child: Text('Creado')),
@@ -38,7 +40,12 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
               child: IconButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    //TODO: Implementar creacion de nota
+                    notesProvider.create(Note(
+                        title: titleController.text,
+                        description: descriptionController.text,
+                        state: selectedState!,
+                        important: important,
+                        createdAt: DateTime.now()));
                     context.pop();
                   }
                 },

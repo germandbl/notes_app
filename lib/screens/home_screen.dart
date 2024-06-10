@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:notes_app/providers/notes_provider.dart';
 import 'package:notes_app/widgets/custom_card.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final notesProvider = context.watch<NotesProvider>();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Mis notas"),
@@ -18,8 +22,9 @@ class HomeScreen extends StatelessWidget {
           children: [
             Expanded(
                 child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (context, index) => const CustomCard(),
+              itemCount: notesProvider.notes.length,
+              itemBuilder: (context, index) =>
+                  CustomCard(note: notesProvider.notes[index]),
             ))
           ],
         ),
