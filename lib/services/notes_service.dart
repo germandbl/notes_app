@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:notes_app/models/note.dart';
 
 class NotesService {
-  final notesInstance = FirebaseFirestore.instance.collection('note');
+  final notesInstance = FirebaseFirestore.instance.collection('notes');
 
   Future<Note> getNoteById(String noteId) async {
     final snapshot = await notesInstance.get();
@@ -49,9 +49,8 @@ class NotesService {
     });
   }
 
-  Future deleteNoteById(int id) {
-    // TODO: implement deleteNoteById
-    throw UnimplementedError();
+  Future deleteNoteById(String noteId) {
+    return notesInstance.doc(noteId).delete();
   }
 
   Future<Note> updateNote(Note note) {

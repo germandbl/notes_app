@@ -73,7 +73,7 @@ class _NoteScreenState extends State<NoteScreen> {
               padding: const EdgeInsets.only(right: 4),
               child: IconButton(
                 onPressed: () {
-                  notesProvider;
+                  notesProvider.delete(widget.noteId);
                   context.pop();
                 },
                 icon: Icon(Icons.delete_rounded, color: colors.error),
