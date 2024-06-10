@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({
@@ -17,7 +18,9 @@ class CustomCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ).clipBehavior,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            context.go('/note/adasdasd');
+          },
           child: Padding(
               padding: const EdgeInsets.all(10),
               child: Column(

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:notes_app/presentation/widgets/custom_text_form_field.dart';
+import 'package:notes_app/widgets/custom_text_form_field.dart';
 
-class NoteScreen extends StatefulWidget {
-  const NoteScreen({super.key});
+class CreateNoteScreen extends StatefulWidget {
+  const CreateNoteScreen({super.key, this.noteId});
+
+  final int? noteId;
 
   @override
-  State<NoteScreen> createState() => _NoteScreenState();
+  State<CreateNoteScreen> createState() => _CreateNoteScreenState();
 }
 
-class _NoteScreenState extends State<NoteScreen> {
+class _CreateNoteScreenState extends State<CreateNoteScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController titleController = TextEditingController();
   final FocusNode titleFocusNode = FocusNode();
   final TextEditingController descriptionController = TextEditingController();
   final FocusNode descriptionFocusNode = FocusNode();
-
   String? selectedState;
   bool important = false;
 
@@ -38,6 +39,7 @@ class _NoteScreenState extends State<NoteScreen> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     //TODO: Implementar creacion de nota
+                    context.pop();
                   }
                 },
                 icon: Icon(Icons.save, color: colors.primary),
@@ -47,17 +49,6 @@ class _NoteScreenState extends State<NoteScreen> {
                         borderRadius: BorderRadius.circular(12))),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.delete, color: colors.error),
-                style: IconButton.styleFrom(
-                    iconSize: 30,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12))),
-              ),
-            )
           ],
           title: const Text('Nota'),
         ),
