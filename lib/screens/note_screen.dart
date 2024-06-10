@@ -26,6 +26,17 @@ class _NoteScreenState extends State<NoteScreen> {
   @override
   Widget build(BuildContext context) {
     final notesProvider = context.read<NotesProvider>();
+
+    final note = (notesProvider.notes.length <= 1)
+        ? notesProvider.notes.first
+        : notesProvider.notes
+            .firstWhere((note) => note.noteId == widget.noteId);
+
+    titleController.text = note.title;
+    descriptionController.text = note.description ?? '';
+    selectedState = note.state;
+    important = note.important;
+
     final colors = Theme.of(context).colorScheme;
     List<DropdownMenuItem<String>> states = const [
       DropdownMenuItem(value: 'Creado', child: Text('Creado')),
@@ -52,6 +63,20 @@ class _NoteScreenState extends State<NoteScreen> {
                   }
                 },
                 icon: Icon(Icons.save, color: colors.primary),
+                style: IconButton.styleFrom(
+                    iconSize: 30,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12))),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 4),
+              child: IconButton(
+                onPressed: () {
+                  notesProvider;
+                  context.pop();
+                },
+                icon: Icon(Icons.delete_rounded, color: colors.error),
                 style: IconButton.styleFrom(
                     iconSize: 30,
                     shape: RoundedRectangleBorder(
@@ -98,12 +123,7 @@ class _NoteScreenState extends State<NoteScreen> {
                   ),
                   const SizedBox(height: 30),
                   DropdownButtonFormField(
-                      validator: (String? value) {
-                        if (value == null) {
-                          return "Por favor selecciona un estado";
-                        }
-                        return null;
-                      },
+                      value: selectedState,
                       items: states,
                       onChanged: (value) {
                         selectedState = value;
