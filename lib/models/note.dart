@@ -1,4 +1,5 @@
 class Note {
+  final String? noteId;
   final String title;
   final String? description;
   final bool important;
@@ -6,7 +7,8 @@ class Note {
   final DateTime createdAt;
 
   Note(
-      {required this.title,
+      {this.noteId,
+      required this.title,
       required this.description,
       required this.important,
       required this.state,
