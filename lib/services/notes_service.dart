@@ -53,8 +53,13 @@ class NotesService {
     return notesInstance.doc(noteId).delete();
   }
 
-  Future<Note> updateNote(Note note) {
-    // TODO: implement updateNote
-    throw UnimplementedError();
+  Future updateNote(Note note) {
+    return notesInstance.doc(note.noteId).update({
+      'title': note.title,
+      'description': note.description,
+      'important': note.important,
+      'state': note.state,
+      'createdAt': note.createdAt
+    });
   }
 }

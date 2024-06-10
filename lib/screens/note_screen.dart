@@ -6,9 +6,9 @@ import 'package:notes_app/widgets/custom_text_form_field.dart';
 import 'package:provider/provider.dart';
 
 class NoteScreen extends StatefulWidget {
-  const NoteScreen({super.key, required this.noteId});
+  const NoteScreen({super.key, required this.note});
 
-  final String noteId;
+  final Note note;
 
   @override
   State<NoteScreen> createState() => _NoteScreenState();
@@ -24,18 +24,18 @@ class _NoteScreenState extends State<NoteScreen> {
   bool important = false;
 
   @override
+  void initState() {
+    super.initState();
+    titleController.text = widget.note.title;
+    descriptionController.text = widget.note.description!;
+    selectedState = widget.note.state;
+    important = widget.note.important;
+  }
+
+  @override
   Widget build(BuildContext context) {
+
     final notesProvider = context.read<NotesProvider>();
-
-    final note = (notesProvider.notes.length <= 1)
-        ? notesProvider.notes.first
-        : notesProvider.notes
-            .firstWhere((note) => note.noteId == widget.noteId);
-
-    titleController.text = note.title;
-    descriptionController.text = note.description ?? '';
-    selectedState = note.state;
-    important = note.important;
 
     final colors = Theme.of(context).colorScheme;
     List<DropdownMenuItem<String>> states = const [
@@ -53,7 +53,8 @@ class _NoteScreenState extends State<NoteScreen> {
               child: IconButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    notesProvider.create(Note(
+                    notesProvider.update(Note(
+                        noteId: widget.note.noteId,
                         title: titleController.text,
                         description: descriptionController.text,
                         state: selectedState!,
@@ -73,7 +74,7 @@ class _NoteScreenState extends State<NoteScreen> {
               padding: const EdgeInsets.only(right: 4),
               child: IconButton(
                 onPressed: () {
-                  notesProvider.delete(widget.noteId);
+                  notesProvider.delete(widget.note.noteId!);
                   context.pop();
                 },
                 icon: Icon(Icons.delete_rounded, color: colors.error),
@@ -136,9 +137,11 @@ class _NoteScreenState extends State<NoteScreen> {
                   const SizedBox(height: 30),
                   CheckboxListTile(
                       value: important,
-                      onChanged: (bool? value) {
+                      onChanged: (value) {
                         setState(() {
+                          
                           important = !important;
+                          print(important);
                         });
                       },
                       title: const Text('Es importante')),

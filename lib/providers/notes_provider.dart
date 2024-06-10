@@ -19,11 +19,15 @@ class NotesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> update(Note note) async {
+    await notesService.updateNote(note);
+    notes[notes.indexWhere((note) => note.noteId == note.noteId)] = note;
+    notifyListeners();
+  }
+
   Future<void> delete(String noteId) async {
     await notesService.deleteNoteById(noteId);
     notes.removeWhere((note) => note.noteId == noteId);
     notifyListeners();
   }
-
-
 }

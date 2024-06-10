@@ -23,7 +23,7 @@ class CustomCard extends StatelessWidget {
         ).clipBehavior,
         child: InkWell(
           onTap: () {
-            context.go('/note/${note.noteId}');
+            context.goNamed('note', extra: note);
           },
           child: Padding(
               padding: const EdgeInsets.all(10),
