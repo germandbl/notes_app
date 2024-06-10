@@ -33,7 +33,7 @@ class NotesService {
           description: doc.data()['description'],
           important: doc.data()['important'],
           state: doc.data()['state'],
-          createdAt: doc.data()['createdAt']);
+          createdAt: (doc.data()['createdAt'] as Timestamp).toDate());
     }).toList();
 
     return notes;
