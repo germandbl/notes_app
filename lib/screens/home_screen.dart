@@ -22,10 +22,10 @@ class HomeScreen extends StatelessWidget {
           children: [
             Expanded(
                 child: ListView.builder(
-              itemCount: notesProvider.notes.length,
-              itemBuilder: (context, index) =>
-                  CustomCard(note: notesProvider.notes[index]),
-            ))
+                    itemCount: notesProvider.notes.length,
+                    itemBuilder: (context, index) {
+                      return CustomCard(note: notesProvider.notes[index]);
+                    }))
           ],
         ),
       ),

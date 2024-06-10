@@ -23,7 +23,6 @@ class NotesService {
 
   Future<List<Note>> getNotes() async {
     List<Note> notes = [];
-
     final snapshot = await notesInstance.get();
 
     notes = snapshot.docs.map((doc) {
@@ -35,7 +34,7 @@ class NotesService {
           state: doc.data()['state'],
           createdAt: (doc.data()['createdAt'] as Timestamp).toDate());
     }).toList();
-
+    
     return notes;
   }
 

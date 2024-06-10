@@ -34,7 +34,6 @@ class _NoteScreenState extends State<NoteScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final notesProvider = context.read<NotesProvider>();
 
     final colors = Theme.of(context).colorScheme;
@@ -60,7 +59,6 @@ class _NoteScreenState extends State<NoteScreen> {
                         state: selectedState!,
                         important: important,
                         createdAt: DateTime.now()));
-                    context.pop();
                   }
                 },
                 icon: Icon(Icons.save, color: colors.primary),
@@ -139,9 +137,7 @@ class _NoteScreenState extends State<NoteScreen> {
                       value: important,
                       onChanged: (value) {
                         setState(() {
-                          
                           important = !important;
-                          print(important);
                         });
                       },
                       title: const Text('Es importante')),

@@ -11,11 +11,12 @@ final appRouter = GoRouter(initialLocation: "/", routes: [
         builder: (context, state) {
           return const CreateNoteScreen();
         }),
-        GoRoute(
+    GoRoute(
         path: 'note',
         name: 'note',
         builder: (context, state) {
           final Note note = state.extra as Note;
+
           return NoteScreen(note: note);
         }),
   ]),

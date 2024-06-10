@@ -8,20 +8,18 @@ class NotesProvider extends ChangeNotifier {
 
   Future<void> getNotes() async {
     final allNotes = await notesService.getNotes();
-
-    notes.addAll(allNotes);
+    notes = allNotes;
     notifyListeners();
   }
 
   Future<void> create(Note note) async {
     await notesService.create(note);
-    notes.add(note);
-    notifyListeners();
+    await getNotes();
   }
 
   Future<void> update(Note note) async {
+    notes = notes.map((n) => (n.noteId == note.noteId) ? note : n).toList();
     await notesService.updateNote(note);
-    notes[notes.indexWhere((note) => note.noteId == note.noteId)] = note;
     notifyListeners();
   }
 
