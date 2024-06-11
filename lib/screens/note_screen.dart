@@ -23,6 +23,18 @@ class _NoteScreenState extends State<NoteScreen> {
   String? selectedState;
   bool important = false;
 
+  void showCustomSnackbar(BuildContext context) {
+    ScaffoldMessenger.of(context).clearSnackBars();
+
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      backgroundColor: Theme.of(context).primaryColor,
+      content: const Text('Tu nota se guardó correctamente'),
+      action: SnackBarAction(label: 'Ok', onPressed: () {}, textColor: Theme.of(context).colorScheme.surface),
+      duration: const Duration(seconds: 2),
+    ));
+  }
+
+
   @override
   void initState() {
     super.initState();
@@ -59,6 +71,8 @@ class _NoteScreenState extends State<NoteScreen> {
                         state: selectedState!,
                         important: important,
                         createdAt: DateTime.now()));
+
+                    showCustomSnackbar(context);
                   }
                 },
                 icon: Icon(Icons.save, color: colors.primary),

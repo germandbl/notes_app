@@ -63,7 +63,7 @@ class CustomCard extends StatelessWidget {
                   const SizedBox(height: 10),
                   SizedBox(
                     height: 120,
-                    child: Text(note.description ?? ''),
+                    child: Text((note.description != null) ? (note.description!.length > 200 ? ('${note.description!.substring(0, 200)}...') : note.description!) : '')
                   ),
                 ],
               )),
